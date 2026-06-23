@@ -1,3 +1,5 @@
+"use client";
+
 type TitleType = {
   tag: "h1" | "h2";
   topLine?: string;

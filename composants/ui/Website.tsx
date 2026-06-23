@@ -1,3 +1,5 @@
+"use client";
+
 import { WebsiteType } from "@/types/website";
 import Image from "next/image";
 import Link from "next/link";

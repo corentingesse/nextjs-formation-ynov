@@ -1,3 +1,5 @@
+"use client";
+
 type VideoType = {
   src: string;
   type?: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import { WebsiteType } from "@/types/website";
 import SiteMenu from "../layout/SiteMenu";
 import Title from "./Title";
