@@ -2,19 +2,18 @@
 import Link from "next/link";
 import Logo from "../ui/Logo";
 
-export default function Header() {
+export default function Header({ menu }: { menu: any }) {
   return (
     <header className="flex items-center gap-5 py-8 px-6">
       <Logo />
 
       <nav className="flex-1">
         <ul className="flex items-center justify-end gap-5">
-          <li>
-            <Link href="/websites">Sites web</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact</Link>
-          </li>
+          {menu.data.nav_links.map((link: any) => (
+            <li key={link.link.id}>
+              <Link href={link.link.url}>{link.link_text}</Link>
+            </li>
+          ))}
           <li className="hidden md:block flex-1">
             <form
               role="search"

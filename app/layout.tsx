@@ -3,12 +3,15 @@ import Header from "@/composants/layout/Header";
 import ScrollTop from "@/composants/layout/ScrollTop";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+import { client } from "@/utils/prismicio";
 
 const inter = Inter({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-inter",
 });
+
+const menu= await client.getSingle("menu");
 
 export default function RootLayout({
   children,
@@ -24,7 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`flex flex-col min-h-dvh ${inter.className}`}>
-        <Header />
+        <Header menu={menu} />
         {children}
         <ScrollTop />
         <Footer />
