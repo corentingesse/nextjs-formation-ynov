@@ -1,3 +1,4 @@
+import { getMetadata } from "@/libs/metadata";
 import Mentions from "@/public/mentions.mdx";
 import type { Metadata } from "next";
 
@@ -5,6 +6,10 @@ export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Mentions légales du site Next Formation",
 };
+
+export async function generateStaticParams() {
+  return getMetadata("mentions");
+}
 
 export default function MentionsPage() {
   return (

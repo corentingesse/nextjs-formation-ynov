@@ -25,6 +25,9 @@ export default async function HomePage() {
   const client = createClient();
   const websites = await client.getAllByType("website");
 
+  const page = await client.getSingle("home");
+  console.log("page: ", page);
+
   return (
     <main>
       <WebsiteHeader website={websites[0]} />
