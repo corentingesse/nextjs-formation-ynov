@@ -32,13 +32,13 @@ export default function WebsiteHeader({ website }: WebsiteHeaderType) {
           <div className="flex justify-center gap-4">
             <span
               onClick={() =>
-                pins.some((p) => p.id === website.id)
+                pins.some((p) => p.uid === website.uid)
                   ? removePin(website)
                   : addPin(website)
               }
               className="material-symbols-outlined cursor-pointer"
             >
-              {pins.some((p) => p.id === website.id) ? "keep_off" : "keep"}
+              {pins.some((p) => p.uid === website.uid) ? "keep_off" : "keep"}
             </span>
 
             {isFilled.link(website.data.weblink) && (
