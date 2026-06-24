@@ -4,6 +4,22 @@ import Title from "@/composants/ui/Title";
 import Website from "@/composants/ui/Website";
 import WebsiteHeader from "@/composants/ui/WebsiteHeader";
 import { createClient } from "@/prismicio";
+import { asImageSrc } from "@prismicio/client";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient();
+  const home = await client.getSingle("home").catch(() => null);
+
+  return {
+    title: home?.data.meta_title || "Accueil",
+    description: home?.data.meta_description || "Découvrez les derniers sites web et partagez vos avis",
+    openGraph: (() => {
+      const img = home?.data.meta_image && asImageSrc(home.data.meta_image);
+      return img ? { images: [{ url: img }] } : undefined;
+    })(),
+  };
+}
 
 export default async function HomePage() {
   const client = createClient();

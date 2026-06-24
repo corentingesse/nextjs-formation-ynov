@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: true,
   pageExtensions: ["mdx", "tsx", "ts"],
   images: {
@@ -12,6 +11,15 @@ const nextConfig: NextConfig = {
         hostname: "images.prismic.io",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/ancienne-url",
+        destination: "/nouvelle-url",
+        permanent: true,
+      },
+    ];
   },
 };
 
