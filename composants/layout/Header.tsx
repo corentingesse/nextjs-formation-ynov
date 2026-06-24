@@ -9,7 +9,7 @@ export default function Header({ menu }: { menu: any }) {
 
       <nav className="flex-1">
         <ul className="flex items-center justify-end gap-5">
-          {menu.data.nav_links.map((link: any) => (
+          {menu?.data?.nav_links?.map((link: any) => (
             <li key={link.link.id}>
               <Link href={link.link.url}>{link.link_text}</Link>
             </li>

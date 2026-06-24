@@ -3,7 +3,7 @@ import Header from "@/composants/layout/Header";
 import ScrollTop from "@/composants/layout/ScrollTop";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { client } from "@/utils/prismicio";
+import { createClient } from "@/prismicio";
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -11,7 +11,8 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const menu= await client.getSingle("menu");
+const client = createClient();
+const menu = await client.getSingle("menu_main").catch(() => null);
 
 export default function RootLayout({
   children,
