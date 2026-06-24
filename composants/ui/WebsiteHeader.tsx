@@ -6,11 +6,15 @@ import SiteMenu from "../layout/SiteMenu";
 import Title from "./Title";
 import { PrismicImage } from "@prismicio/react";
 import Link from "next/link";
+import usePin from "@/store/pin";
 
 type WebsiteHeaderType = {
   website: WebsiteDocument;
 };
 export default function WebsiteHeader({ website }: WebsiteHeaderType) {
+  const isPinned = usePin((state) => state.pins.includes(website.uid));
+  const togglePin = usePin((state) => state.togglePin);
+
   return (
     <>
       <div className="px-6 py-12">
@@ -27,7 +31,14 @@ export default function WebsiteHeader({ website }: WebsiteHeaderType) {
           </time>
           <Title tag="h1">{website.data.title}</Title>
           <div className="flex justify-center gap-4">
-            <span className="material-symbols-outlined">keep</span>
+            <button onClick={() => togglePin(website.uid)}>
+              <span
+                className="material-symbols-outlined"
+                style={isPinned ? { fontVariationSettings: "'FILL' 1" } : undefined}
+              >
+                keep
+              </span>
+            </button>
             {isFilled.link(website.data.weblink) && (
               <a href={asLink(website.data.weblink)!} target="_blank">
                 <span className="material-symbols-outlined">open_in_new</span>

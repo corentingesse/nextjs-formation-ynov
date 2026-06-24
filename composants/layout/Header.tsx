@@ -1,6 +1,17 @@
 "use client";
 import Link from "next/link";
 import Logo from "../ui/Logo";
+import usePin from "@/store/pin";
+
+function PinCount() {
+  const count = usePin((state) => state.pins.length);
+  return (
+    <>
+      <span>{count}</span>
+      <span className="material-symbols-outlined">keep</span>
+    </>
+  );
+}
 
 export default function Header() {
   return (
@@ -31,9 +42,8 @@ export default function Header() {
             </form>
           </li>
           <li>
-            <Link href="/pins" className="flex items-center">
-              13
-              <span className="material-symbols-outlined">keep</span>
+            <Link href="/pins" className="flex items-center gap-1">
+              <PinCount />
             </Link>
           </li>
           <li>
