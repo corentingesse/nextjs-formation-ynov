@@ -14,11 +14,13 @@ export const usePinsStore = create<PinsState>()(
       pins: [],
       addPin: (p) =>
         set((state) => ({
-          pins: state.pins.includes(p) ? state.pins : [...state.pins, p],
+          pins: state.pins.some((pin) => pin.id === p.id)
+            ? state.pins
+            : [...state.pins, p],
         })),
       removePin: (p) =>
         set((state) => ({
-          pins: state.pins.filter((pin) => pin !== p),
+          pins: state.pins.filter((pin) => pin.id !== p.id),
         })),
     }),
     {
