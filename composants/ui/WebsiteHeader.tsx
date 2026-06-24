@@ -1,44 +1,45 @@
-import { WebsiteType } from "@/types/website";
+"use client";
+
+import { WebsiteDocument } from "@/prismicio-types";
+import { asLink, isFilled } from "@prismicio/client";
 import SiteMenu from "../layout/SiteMenu";
 import Title from "./Title";
-import Image from "next/image";
+import { PrismicImage } from "@prismicio/react";
 import Link from "next/link";
 
 type WebsiteHeaderType = {
-  website: WebsiteType;
+  website: WebsiteDocument;
 };
 export default function WebsiteHeader({ website }: WebsiteHeaderType) {
   return (
     <>
       <div className="px-6 py-12">
-        <header className="text-center pb-12">
-          <time dateTime={website.date}>
-            {new Date(website.date).toLocaleDateString("fr-FR", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
+        <header className="text-center pb-12 flex flex-col gap-4">
+          <time dateTime={website.first_publication_date}>
+            {new Date(website.first_publication_date).toLocaleDateString(
+              "fr-FR",
+              {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              },
+            )}
           </time>
-          <Title tag="h1">{website.title}</Title>
-          <div className="flex gap-2 justify-center">
+          <Title tag="h1">{website.data.title}</Title>
+          <div className="flex justify-center gap-4">
             <span className="material-symbols-outlined">keep</span>
-            <a href={website.url} target="_blank">
-              <span className="material-symbols-outlined">open_in_new</span>
-            </a>
+            {isFilled.link(website.data.weblink) && (
+              <a href={asLink(website.data.weblink)!} target="_blank">
+                <span className="material-symbols-outlined">open_in_new</span>
+              </a>
+            )}
           </div>
         </header>
-        <Link href={`/websites/${website.slug}`}>
-          <Image
-            src={`/websites/${website.thumbnail}`}
-            alt={`Image ${website.title}`}
-            width="1800"
-            height="900"
-            className="rounded-lg"
-            loading="eager"
-          />
+        <Link href={`/websites/${website.uid}`}>
+          <PrismicImage field={website.data.img} className="rounded-lg" />
         </Link>
       </div>
-      <SiteMenu slug={website.slug} />
+      <SiteMenu slug={website.uid} />
     </>
   );
 }

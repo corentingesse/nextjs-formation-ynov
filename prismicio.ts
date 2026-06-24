@@ -1,6 +1,7 @@
 import {
-	createClient as baseCreateClient,
-	type ClientConfig,
+  createClient as baseCreateClient,
+  Route,
+  type ClientConfig,
 } from "@prismicio/client";
 import { enableAutoPreviews } from "@prismicio/next";
 import prismicConfig from "./prismic.config.json";
@@ -17,16 +18,16 @@ export const repositoryName = prismicConfig.repositoryName;
  * @param config - Configuration for the Prismic client.
  */
 export const createClient = (config: ClientConfig = {}) => {
-	const client = baseCreateClient(repositoryName, {
-		routes: prismicConfig.routes,
-		fetchOptions:
-			process.env.NODE_ENV === 'production'
-				? { next: { tags: ['prismic'] }, cache: 'force-cache' }
-				: { next: { revalidate: 5 } },
-		...config,
-	});
+  const client = baseCreateClient(repositoryName, {
+    routes: prismicConfig.routes,
+    fetchOptions:
+      process.env.NODE_ENV === "production"
+        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
+        : { next: { revalidate: 5 } },
+    ...config,
+  });
 
-	enableAutoPreviews({ client });
+  enableAutoPreviews({ client });
 
-	return client;
+  return client;
 };

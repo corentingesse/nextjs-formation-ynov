@@ -42,3 +42,4 @@ next-env.d.ts
 
 #prismic
 prismic.config.json
+slicemachine.config.json

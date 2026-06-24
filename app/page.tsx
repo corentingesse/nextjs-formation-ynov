@@ -3,12 +3,11 @@ import Video from "@/composants/ui/Video";
 import Title from "@/composants/ui/Title";
 import Website from "@/composants/ui/Website";
 import WebsiteHeader from "@/composants/ui/WebsiteHeader";
-import { WebsiteType } from "@/types/website";
+import { createClient } from "@/prismicio";
 
 export default async function HomePage() {
-  const websites: WebsiteType[] = await fetch(
-    "http://localhost:3000/websites.json",
-  ).then((res) => res.json());
+  const client = createClient();
+  const websites = await client.getAllByType("website");
 
   return (
     <main>
@@ -41,7 +40,7 @@ export default async function HomePage() {
           Highlight
         </Title>
 
-        <Video src="/highlight.mp4" />
+        <Video id="414785329" />
       </div>
     </main>
   );

@@ -2,10 +2,10 @@
 
 import { Button } from "@/composants/ui/Button";
 import Website from "@/composants/ui/Website";
-import { WebsiteType } from "@/types/website";
+import { WebsiteDocument } from "@/prismicio-types";
 
 type WebsitesListType = {
-  websites: WebsiteType[];
+  websites: WebsiteDocument[];
 };
 export default function WebsitesList({ websites }: WebsitesListType) {
   return (
