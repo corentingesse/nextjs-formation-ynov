@@ -9,9 +9,7 @@ import Script from "next/script";
 export default function CookiesConsent() {
   useEffect(() => {
     console.log("CookiesConsent");
-    CookieConsent.run(cookiesParams).then(() =>
-      CookieConsent.showPreferences(),
-    );
+    CookieConsent.run(cookiesParams).then(() => CookieConsent.show(true));
   }, []);
 
   return (
